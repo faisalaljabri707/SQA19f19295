@@ -1,0 +1,47 @@
+
+int main()
+{
+    // Declare variables
+    char regions[NUM_REGIONS][50] = {"North", "South", "East"};
+    char products[NUM_PRODUCTS][50] = {"Product 1", "Product 2", "Product 3", "Product 4", "Product 5"};
+    int sales[NUM_REGIONS][NUM_PRODUCTS]; // 2D array to store sales data
+
+    // Input sales data
+    for (int i = 0; i < NUM_REGIONS; i++)
+    {
+        printf("Enter sales data for region %s:\n", regions[i]);
+        for (int j = 0; j < NUM_PRODUCTS; j++)
+        {
+            printf("Enter sales for %s: ", products[j]);
+            scanf("%d", &sales[i][j]);
+        }
+    }
+
+    // Compare sales data and determine lowest and highest selling products
+    int lowest_sales = sales[0][0];
+    int highest_sales = sales[0][0];
+    char lowest_product[50] = "";
+    char highest_product[50] = "";
+    for (int i = 0; i < NUM_REGIONS; i++)
+    {
+        for (int j = 0; j < NUM_PRODUCTS; j++)
+        {
+            if (sales[i][j] < lowest_sales)
+            {
+                lowest_sales = sales[i][j];
+                strcpy(lowest_product, products[j]);
+            }
+            if (sales[i][j] > highest_sales)
+            {
+                highest_sales = sales[i][j];
+                strcpy(highest_product, products[j]);
+            }
+        }
+    }
+
+    // Print results
+    printf("Lowest selling product: %s (sales: %d)\n", lowest_product, lowest_sales);
+    printf("Highest selling product: %s (sales: %d)\n", highest_product, highest_sales);
+
+    return 0;
+}
